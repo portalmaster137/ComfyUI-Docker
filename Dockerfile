@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.8.0-cudnn-runtime-ubuntu24.04 AS cuda
+FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-runtime
 
 RUN apt-get update && apt-get install -y python3 python3-pip python3-venv git
 
@@ -14,9 +14,10 @@ RUN comfy --skip-prompt install --nvidia
 
 WORKDIR /root/comfy/ComfyUI
 
-RUN mkdir -p /models/checkpoints /models/clip /models/clip_vision /models/configs /models/controlnet /models/diffusion_models /models/unet /models/embeddings /models/loras /models/upscale_models /models/vae
-
 VOLUME [ "/models" ]
+
+RUN mkdir -p /models/checkpoints /models/clip /models/clip_vision /models/configs /models/controlnet /models/diffusion_models /models/unet /models/embeddings /models/loras /models/upscale_models /models/vae /models/vae_approx
+
 
 RUN rm extra_model_paths.yaml.example
 COPY extra_model_paths.yaml .
