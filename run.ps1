@@ -9,6 +9,23 @@ if (Get-Command docker -ErrorAction SilentlyContinue) {
     exit 1
 }
 
+
+# mkdir -p /models/checkpoints /models/clip /models/clip_vision /models/configs /models/controlnet /models/diffusion_models /models/unet /models/embeddings /models/loras /models/upscale_models /models/vae
+# Make the folders only if they don't exist
+if (!(Test-Path ./models/checkpoints)) { mkdir ./models/checkpoints }
+if (!(Test-Path ./models/clip)) { mkdir ./models/clip }
+if (!(Test-Path ./models/clip_vision)) { mkdir ./models/clip_vision }
+if (!(Test-Path ./models/configs)) { mkdir ./models/configs }
+if (!(Test-Path ./models/controlnet)) { mkdir ./models/controlnet }
+if (!(Test-Path ./models/diffusion_models)) { mkdir ./models/diffusion_models }
+if (!(Test-Path ./models/unet)) { mkdir ./models/unet }
+if (!(Test-Path ./models/embeddings)) { mkdir ./models/embeddings }
+if (!(Test-Path ./models/loras)) { mkdir ./models/loras }
+if (!(Test-Path ./models/upscale_models)) { mkdir ./models/upscale_models }
+if (!(Test-Path ./models/vae)) { mkdir ./models/vae }
+if (!(Test-Path ./models/vae_approx)) { mkdir ./models/vae_approx }
+
+
 # Build the image
 & $ContainerManager build -t porta137/comfy:latest .
 & $ContainerManager run -it --rm --gpus all -v ./models:/models -p8188:8188 porta137/comfy:latest
