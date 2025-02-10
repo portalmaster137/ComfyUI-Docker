@@ -15,3 +15,4 @@ comfyui:
   upscale_models: /models/upscale_models/
   vae: /models/vae/
   vae_approx: /models/vae_approx/
+  text_encoders: /models/text_encoders/
